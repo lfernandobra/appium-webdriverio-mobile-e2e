@@ -63,3 +63,8 @@ Setup Emulator & Appium Inspector for Testing
 
 /Users/lfernandobra/Documents/GitHub/udemy-appium-webdriver/app
 
+Setup Linter
+
+eslint-plugin-wdio : npm i eslint-plugin-wdio https://www.npmjs.com/package/eslint-plugin-wdio
+
+ 
