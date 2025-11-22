@@ -34,7 +34,7 @@ describe('iOS Find Element', () => {
 
         await $('//*[@name="Alert Views"]').click();
         await $('//*[@label="Simple"]').click();
-
+        
         await expect(await driver.getAlertText()).toContain("A Short Title Is Best");
     });
 

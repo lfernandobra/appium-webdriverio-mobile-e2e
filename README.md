@@ -62,3 +62,4 @@ Setup Emulator & Appium Inspector for Testing
 ✔ Continue with Appium setup using appium-installer (https://github.com/AppiumTestDistribution/appium-installer)? No
 
 /Users/lfernandobra/Documents/GitHub/udemy-appium-webdriver/app
+
