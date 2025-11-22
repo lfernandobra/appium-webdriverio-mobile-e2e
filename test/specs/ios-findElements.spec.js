@@ -1,3 +1,5 @@
+import { $, $$, expect, driver} from '@wdio/globals';
+
 describe('iOS Find Element', () => {
     
     // 72. Find element by Accessibility Id
