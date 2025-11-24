@@ -67,4 +67,10 @@ Setup Linter
 
 eslint-plugin-wdio : npm i eslint-plugin-wdio https://www.npmjs.com/package/eslint-plugin-wdio
 
- 
+ Securing BrowserStack Credentials using dotenv
+ npm i dotenv
+
+
+Create a file named ".env" with browserstack credentials as the sample below
+BROWSERSTACK_USER=luisfernandobran_J2hxtW
+BROWSERSTACK_KEY=XoyxqGuU5975qtiMSEyY
