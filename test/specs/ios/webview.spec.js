@@ -14,12 +14,24 @@ describe('iOS Webview', () => {
         // pause
         await driver.pause(5000);
 
+        // pause
+        await driver.pause(5000);
+
         // get all the contexts
         await driver.getContexts();
 
+        // pause
+        await driver.pause(5000);
+
+        // get all the contexts
+        const contexts = await driver.getContexts();
+
         // switch to the webview context
 
-        // assertion
+        await driver.switchContext(contexts[1]);
 
+        // assertion
+        const subtitleTxt = await $('.hero__subtitle');
+        await expect(subtitleTxt).toHaveText(expect.stringContaining('automation'))
     });
 });
