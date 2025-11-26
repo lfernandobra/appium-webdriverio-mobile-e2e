@@ -74,3 +74,6 @@ eslint-plugin-wdio : npm i eslint-plugin-wdio https://www.npmjs.com/package/esli
 Create a file named ".env" with browserstack credentials as the sample below
 BROWSERSTACK_USER=luisfernandobran_J2hxtW
 BROWSERSTACK_KEY=XoyxqGuU5975qtiMSEyY
+
+Allure Reporter
+https://webdriver.io/docs/allure-reporter
