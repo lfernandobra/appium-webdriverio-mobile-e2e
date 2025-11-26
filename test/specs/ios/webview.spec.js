@@ -39,6 +39,14 @@ describe('iOS Webview', () => {
 
         // assertion
         const subtitleTxt = await $('.hero__subtitle');
-        await expect(subtitleTxt).toHaveText(expect.stringContaining('automation'))
+        await expect(subtitleTxt).toHaveText(expect.stringContaining('automation'));
+
+        // switch back to the native app
+        await driver.switchContext('NATIVE_APP');
+        await $('~Home').click();
+        
+        // assertion
+        const webddriverTxt = await $('//*[@name="WEBDRIVER"]');
+        await expect(webddriverTxt).toBeDisplayed();
     });
 });
