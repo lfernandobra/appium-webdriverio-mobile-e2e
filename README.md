@@ -84,3 +84,5 @@ npm i allure-commandline
 
 generate report commands : 
 npx allure generate allure-results && npx allure open
+
+Autogenerate Report
