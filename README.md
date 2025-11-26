@@ -74,3 +74,15 @@ eslint-plugin-wdio : npm i eslint-plugin-wdio https://www.npmjs.com/package/esli
 Create a file named ".env" with browserstack credentials as the sample below
 BROWSERSTACK_USER=your_browserstack_username
 BROWSERSTACK_KEY=your_browserstack_access_key
+
+Allure Reporter
+https://webdriver.io/docs/allure-reporter
+
+Displaying the report
+
+npm i allure-commandline
+
+generate report commands : 
+npx allure generate allure-results && npx allure open
+
+Autogenerate Report
