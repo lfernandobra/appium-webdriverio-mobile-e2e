@@ -77,3 +77,10 @@ BROWSERSTACK_KEY=your_browserstack_access_key
 
 Allure Reporter
 https://webdriver.io/docs/allure-reporter
+
+Displaying the report
+
+npm i allure-commandline
+
+generate report commands : 
+npx allure generate allure-results && npx allure open
