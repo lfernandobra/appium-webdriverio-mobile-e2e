@@ -1,4 +1,4 @@
-const AddNoteScreen = require("./add-note.screen");
+import AddNoteScreen from "./add-note.screen.js";
 
 class EditNoteScreen {
   get firstNote() {
@@ -43,4 +43,4 @@ class EditNoteScreen {
   }
 }
 
-module.exports = new EditNoteScreen();
+export default new EditNoteScreen();

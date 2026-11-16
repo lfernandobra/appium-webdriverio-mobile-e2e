@@ -8,30 +8,6 @@ describe('iOS Webview', () => {
             return contexts.length > 1;
         }, { timeout: 30000, timeoutMsg: 'Timed out waiting for another context' });
 
-        //await driver.takeScreenshot();
-        await driver.saveScreenshot('test-screensho.png');
-
-        // // get current context
-        // await driver.getContext();
-
-        // // pause
-        // await driver.pause(5000);
-
-        // // get all the contexts
-        // await driver.getContexts();
-
-        // // pause
-        // await driver.pause(5000);
-
-        // // pause
-        // await driver.pause(5000);
-
-        // // get all the contexts
-        // await driver.getContexts();
-
-        // // pause
-        // await driver.pause(5000);
-
         // get all the contexts
         const contexts = await driver.getContexts();
 

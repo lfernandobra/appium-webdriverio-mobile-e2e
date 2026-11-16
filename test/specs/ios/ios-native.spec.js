@@ -16,7 +16,7 @@ describe('iOS Native Features', () => {
         await expect($('~OK')).not.toExist();
     });
     
-    it.only('Working with Scrollable elements', async () => {
+    it('Working with Scrollable elements', async () => {
         // easiest
         // await driver.execute('mobile: scroll', { direction: "down"});
         // await driver.execute('mobile: scroll', { direction: "up"});
@@ -38,7 +38,9 @@ describe('iOS Native Features', () => {
         await greenPicker.addValue('0');
         await bluePicker.addValue('125');
 
-        await driver.pause(2000);
+        await expect(redPicker).toHaveAttr('value', '125');
+        await expect(greenPicker).toHaveAttr('value', '0');
+        await expect(bluePicker).toHaveAttr('value', '125');
 
     });
 });

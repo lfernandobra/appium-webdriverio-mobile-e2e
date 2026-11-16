@@ -59,7 +59,7 @@ describe('iOS Find Element', () => {
     });
 
     // 77. Exercise
-    it.only('exercise', async () => {
+    it('exercise', async () => {
         await $('~Search').click();
         await $('~Default').click();
         await $('//XCUIElementTypeSearchField').addValue("I love this course!");

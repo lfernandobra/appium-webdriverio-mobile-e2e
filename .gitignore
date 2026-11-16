@@ -1,5 +1,11 @@
-node_modules
+node_modules/
 **/.DS_Store
 .env
-allure-results
-allure-report
+.env.*
+!.env_template
+allure-results/
+allure-report/
+logs/
+*.log
+screenshots/
+test-screensho.png

@@ -8,7 +8,7 @@ describe('Todo Item', () => {
         await ListScreen.listNameInput.addValue("Things to do today");
         await ListScreen.createBtn.click();
         await expect(await ListScreen.listNameField("Things to do today")).toBeExisting();
-        await ListScreen.listNameField('~Things to do today').click();
+        await ListScreen.listNameField("Things to do today").click();
     })
 
     beforeEach(() => {

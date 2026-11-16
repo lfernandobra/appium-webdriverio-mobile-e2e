@@ -1,7 +1,17 @@
 {
-  "name": "appium",
+  "name": "appium-webdriverio-mobile-e2e",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Cross-platform mobile E2E automation framework for Android and iOS using Appium, WebdriverIO, Screen Object Pattern, Allure Reports, and BrowserStack.",
+  "scripts": {
+    "lint": "eslint test/ config/",
+    "test:android": "wdio run ./config/wdio.android.conf.js",
+    "test:ios": "wdio run ./config/wdio.ios.conf.js",
+    "test:bs": "wdio run ./config/wdio.android.bs.conf.js",
+    "report": "allure generate allure-results --clean && allure open"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@wdio/allure-reporter": "^9.20.0",
     "@wdio/appium-service": "^9.20.0",
     "@wdio/browserstack-service": "^9.20.1",
@@ -13,9 +23,6 @@
     "appium-uiautomator2-driver": "^6.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-wdio": "^9.16.2"
-  },
-  "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3"

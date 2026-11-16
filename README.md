@@ -1,88 +1,124 @@
-# udemy_appium_course
+# Appium + WebdriverIO Mobile E2E Automation Framework
 
-Appium Setup
+[![Mobile E2E CI](https://github.com/lfernandobra/appium-webdriverio-mobile-e2e/actions/workflows/ci.yaml/badge.svg)](https://github.com/lfernandobra/appium-webdriverio-mobile-e2e/actions/workflows/ci.yaml)
+[![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v9.20-EA5906?style=flat-square&logo=webdriverio&logoColor=white)](https://webdriver.io/)
+[![Appium](https://img.shields.io/badge/Appium-3.x-662D91?style=flat-square&logo=appium&logoColor=white)](https://appium.io/)
+[![Allure Report](https://img.shields.io/badge/Allure-Report-FF6B6B?style=flat-square)](https://allurereport.org/)
+[![BrowserStack](https://img.shields.io/badge/BrowserStack-Cloud-F58220?style=flat-square&logo=browserstack&logoColor=white)](https://www.browserstack.com/)
 
-WebdriverIO Setup
+Cross-platform mobile test automation framework for **Android (`UIAutomator2`)** and **iOS (`XCUITest`)** using **Appium** and **WebdriverIO v9**. Includes Screen Object abstractions, hybrid native/WebView context switching, **Allure** reporting with automatic failure screenshots, **ESLint (`eslint-plugin-wdio`)** enforcement, **Gherkin BDD** specs, and **BrowserStack** cloud execution via GitHub Actions.
 
-1 - Create a new project:
-    - npm init wide ./{path/to/new/project} 
-    - Select “E2E Testing - of Web or Mobile Applications”
-    - Select “On my local machine”
-    - Select “Mobile - native, hybrid and mobile web apps, on Android or iOS”
-    - Select “Android” or “iOS” : Android has selected
-    - Select “Mocha” : has selected to follow the course instructions
-    - Do you want to use Typescript to write tests? (y/N) : N has selected to follow the course instructions
-    - Do you want WebdriverIO to autogenerate some test files? : n has selected to follow the course instructions
-    - Which reporter do you want to use? spec has selected to follow the course instructions
-    - Do you want to add a plugin to your test setup? No plugin has selected
-    - Would you like to include Visual Testing to your setup? For more information see https://webdriver.io/docs/visual-testing! (y/N) : N has selected to follow the course instructions
-    - Do you want to add a service to your test setup? appium has selected to follow the course instructions
-    - Do you want me to run `npm install` (Y/n) Y
-    - Continue with Appium setup using appium-installer (https://github.com/AppiumTestDistribution/appium-installer)? n has selected to follow the course instructions
-2 - On the project folder
-    - Go to wdio.conf.js, add “'./test/specs/**/*.js'” on spec section
+---
 
-Setup Emulator & Appium Inspector for Testing
+## 1. QA Strategy & Documentation
 
-![Example : Setup Appium Server to Find Elements on application - Android](appium-server-android-config-example.png)
+| Artifact | Purpose | Location |
+| :--- | :--- | :--- |
+| **Test Plan** | Cross-platform scope, architecture decisions, and CI gating | [`docs/qa/TEST_PLAN.md`](docs/qa/TEST_PLAN.md) |
+| **Test Case Inventory** | 14 mapped Android & iOS mobile scenarios | [`docs/qa/TEST_CASES.md`](docs/qa/TEST_CASES.md) |
+| **BDD Specifications** | Gherkin scenarios for Android notes and iOS hybrid/native flows | [`specs/features/`](specs/features/) |
+| **Bug Report Example** | Analysis of hardcoded date fragility & config/selector fixes | [`BUG-001`](docs/qa/bug-reports/BUG-001-hardcoded-date-ios-todo-item.md) |
 
-![Example : Setup Appium Server to Find Elements on application - iOS](appium-server-ios-config-example.png)
+---
 
-# udemy-appium-webdriver
+## 2. Repository Structure
 
-# appium install : npm install -g appium@next
-# appium doctor : npm install -g appium-doctor
-## checking requirements to run ios : appium-doctor --ios
-### install drivers ###
-# iOS : appium driver install xcuitest
-# Android : appium driver install uiautomator2
+```text
+.
+├── .github/workflows/
+│   └── ci.yaml                         # ESLint + ESM config check on push; BrowserStack on manual dispatch
+├── app/
+│   ├── android/                        # ColorNote+Notepad.apk & ApiDemos-debug.apk
+│   └── ios/                            # UIKitCatalog.app & wdiodemoapp.app
+├── config/
+│   ├── wdio.shared.conf.js             # Shared Mocha opts, Allure reporter & failure screenshot hook
+│   ├── wdio.android.conf.js            # Local Android UIAutomator2 configuration (ColorNote)
+│   ├── wdio.ios.conf.js                # Local iOS XCUITest configuration (WebView)
+│   └── wdio.android.bs.conf.js         # BrowserStack Android cloud configuration
+├── docs/qa/
+│   ├── bug-reports/
+│   │   └── BUG-001-hardcoded-date-ios-todo-item.md
+│   ├── TEST_CASES.md
+│   └── TEST_PLAN.md
+├── specs/features/
+│   ├── android-notes.feature           # BDD scenarios for ColorNote Android
+│   └── ios-mobile.feature              # BDD scenarios for iOS WebView, UIKitCatalog & Todo
+├── test/
+│   ├── screenobjects/
+│   │   ├── android/                    # AddNoteScreen & EditNoteScreen
+│   │   ├── item.screen.js              # iOS Todo Item Screen Object
+│   │   └── list.screen.js              # iOS Todo List Screen Object
+│   └── specs/
+│       ├── android/                    # Android E2E specs
+│       ├── ios/                        # iOS WebView, Native & Todo specs
+│       └── ios-findElements.spec.js    # iOS locator strategies (Accessibility ID, Class Chain, Predicate)
+├── .env_template                       # Environment variable template for BrowserStack
+├── .nvmrc                              # Node.js 24.11.1
+├── eslint.config.mjs                   # ESLint 9 flat config + eslint-plugin-wdio rules
+└── package.json
+```
 
-# WebdriverIO Setup
-## Create a new project:
-    - npm init wdio .
+---
 
-===============================
-🤖 WDIO Configuration Wizard 🧙
-===============================
+## 3. Technical Highlights
 
-✔ A project named "udemy-appium-webdriver" was detected at "/Users/lfernandobra/Documents/GitHub/udemy-appium-webdriver", correct? Yes
-✔ What type of testing would you like to do? E2E Testing - of Web or Mobile Applications
-✔ Where is your automation backend located? On my local machine
-✔ Which environment you would like to automate? Mobile - native, hybrid and mobile web apps, on Android or iOS
-✔ Which mobile environment you'd like to automate? iOS - applications on iOS, iPadOS, and tvOS
-    > using XCTest (https://appium.github.io/appium-xcuitest-driver)
-✔ Which framework do you want to use? Mocha (https://mochajs.org/)
-✔ Do you want to use Typescript to write tests? No
-✔ Do you want WebdriverIO to autogenerate some test files? No
-✔ Which reporter do you want to use? spec
-✔ Do you want to add a plugin to your test setup? 
-✔ Would you like to include Visual Testing to your setup? For more information see https://webdriver.io/docs/visual-testing! No
-✔ Do you want to add a service to your test setup? appium
-✔ Do you want me to run ⁠ npm install ⁠ Yes
-✔ Continue with Appium setup using appium-installer (https://github.com/AppiumTestDistribution/appium-installer)? No
+* **Multi-Environment Config Inheritance:** [`config/wdio.shared.conf.js`](config/wdio.shared.conf.js) centralizes Mocha timeouts, Allure report generation (`onComplete`), and automatic failure screenshots (`afterTest` -> `driver.takeScreenshot()`), extended cleanly by local Android, local iOS, and BrowserStack configs.
+* **Screen Object Model:** Platform-specific selectors (`resource-id`, `~accessibilityId`, `-ios class chain`, `-ios predicate string`) are isolated from test steps under `test/screenobjects/`.
+* **Dynamic Hybrid WebView Handling:** [`test/specs/ios/webview.spec.js`](test/specs/ios/webview.spec.js) polls `driver.getContexts()` via `driver.waitUntil()` instead of static sleeps before switching between `NATIVE_APP` and `WEBVIEW`.
+* **Static WDIO Guardrails:** [`eslint.config.mjs`](eslint.config.mjs) enforces `wdio/await-expect`, `wdio/no-debug`, and `wdio/no-pause` across tests and configs.
 
-/Users/lfernandobra/Documents/GitHub/udemy-appium-webdriver/app
+---
 
-Setup Linter
+## 4. Setup & Execution
 
-eslint-plugin-wdio : npm i eslint-plugin-wdio https://www.npmjs.com/package/eslint-plugin-wdio
+### Prerequisites
+* Node.js `>= 22.x` (pinned in [`.nvmrc`](.nvmrc): `24.11.1`)
+* Local Appium drivers (when running against local emulators/simulators):
+  ```bash
+  npm install -g appium
+  appium driver install uiautomator2
+  appium driver install xcuitest
+  ```
+* Android Studio Emulator (`Pixel 4`, API matching `wdio.android.conf.js`) or macOS Xcode iOS Simulator (`iPhone 12`, iOS 17.2)
 
- Securing BrowserStack Credentials using dotenv
- npm i dotenv
+### Installation & Local Commands
 
+```bash
+# 1. Install project dependencies
+npm ci
 
-Create a file named ".env" with browserstack credentials as the sample below
-BROWSERSTACK_USER=your_browserstack_username
-BROWSERSTACK_KEY=your_browserstack_access_key
+# 2. Run ESLint checks (no device required)
+npm run lint
 
-Allure Reporter
-https://webdriver.io/docs/allure-reporter
+# 3. Run local Android suite (requires running Android emulator)
+npm run test:android
 
-Displaying the report
+# 4. Run local iOS WebView suite (requires macOS + iOS Simulator)
+npm run test:ios
 
-npm i allure-commandline
+# 5. Generate & open Allure report
+npm run report
+```
 
-generate report commands : 
-npx allure generate allure-results && npx allure open
+### BrowserStack Cloud Execution
 
-Autogenerate Report
+1. Copy `.env_template` to `.env` (never commit `.env`):
+   ```env
+   BROWSERSTACK_USER=your_browserstack_username
+   BROWSERSTACK_KEY=your_browserstack_access_key
+   ```
+2. Run locally against BrowserStack:
+   ```bash
+   npm run test:bs
+   ```
+3. Or trigger the **`BrowserStack Android E2E`** job manually via **Actions -> Mobile E2E CI -> Run workflow** after configuring `BS_USER` and `BS_KEY` in GitHub Repository Secrets.
+
+---
+
+## 5. Author
+
+**Luis Fernando Brandão**  
+QA Automation Engineer  
+* [LinkedIn](https://linkedin.com/in/lfernandobra)  
+* [GitHub](https://github.com/lfernandobra)  
+* lfernandobra@gmail.com
